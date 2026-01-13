@@ -1,7 +1,7 @@
 require("dotenv").config();
 const bcrypt = require("bcryptjs");
 const userModel = require("../models/user.model")
-const foodPartnerModel = require("../models/foof-partner.model");
+const foodPartnerModel = require("../models/food-partner.model");
 const jwtSecret = require('jsonwebtoken')
 
 
