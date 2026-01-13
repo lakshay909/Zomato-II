@@ -1,5 +1,6 @@
 require("dotenv").config();
 const foodPartnerModel = require("../models/food-partner.model");
+const userModel = require("../models/user.model");
 const jwt = require(('jsonwebtoken'));
 
 async function authfoodPartnerMiddleware(req, res, next){
@@ -27,7 +28,30 @@ async function authfoodPartnerMiddleware(req, res, next){
     }
 }
 
+async function authUserMiddleware(req, res, next){
+    const token = req.cookies.token;
+
+    if(!token){
+        return res.status(401).status({
+            message: "Please login first."
+        })
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRETKEY);
+
+        const user = await userModel.findById(decoded.id);
+
+        req.user = user;
+
+        next();
+    } catch (err) {
+        return res.status(401).json({
+            message: "invalid token"
+        })
+    }
+}
 module.exports= {
     authfoodPartnerMiddleware,
-
+    authUserMiddleware
 }
