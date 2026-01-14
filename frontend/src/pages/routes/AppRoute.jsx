@@ -6,6 +6,7 @@ import LoginPartner from './LoginPartner'
 import RegisterPartner from './RegisterPartner'
 import Home from '../general/home'
 import Profile from '../food-partner/profile'
+import CreateFood from '../food-partner/CreateFood'
 
 export const AppRoute = () => {
   return (
@@ -16,7 +17,7 @@ export const AppRoute = () => {
             <Route path="/food-partner/register" element={<RegisterPartner/>} />
             <Route path="/food-partner/login" element={<LoginPartner/>} />
             <Route path="/" element={<Home/>} />
-            <Route path='/createFood' element={<div>Create Food</div>} />
+            <Route path='/createFood' element={<CreateFood />} />
             <Route path='/food-partner/:id' element={<Profile />} />
         </Routes>
     </Router>

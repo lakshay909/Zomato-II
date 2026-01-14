@@ -1,0 +1,81 @@
+/* Mobile-first styles for CreateFood page */
+.create-food-page {
+  padding: 18px;
+  background: var(--page-bg, #f7f7f8);
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.create-food-form {
+  width: 100%;
+  max-width: 760px;
+  background: var(--card-bg, #ffffff);
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(23, 23, 23, 0.06);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.form-title {
+  font-size: 1.25rem;
+  margin: 0 0 12px 0;
+  color: var(--text-primary, #111111);
+}
+
+.field {
+  display: block;
+  margin-bottom: 14px;
+}
+
+.field-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--muted, #666666);
+  margin-bottom: 6px;
+}
+
+.field-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--muted-border, #e6e6e6);
+  background: var(--input-bg, #fff);
+  font-size: 0.95rem;
+  box-sizing: border-box;
+}
+
+.textarea { resize: vertical; }
+
+.video-preview {
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 8px;
+  background: #000;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+
+.btn {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn.primary {
+  background: var(--primary, #ff6b6b);
+  color: #fff;
+}
+
+@media (min-width: 820px) {
+  .create-food-form { padding: 28px; }
+  .form-title { font-size: 1.5rem; }
+}
