@@ -1,0 +1,83 @@
+/* Profile layout using existing color variables from variables.css */
+.profile-page {
+  padding: 16px;
+  max-width: 420px;
+  margin: 0 auto;
+  color: var(--text);
+  min-height: 100vh;
+  background: transparent;
+}
+
+.profile-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.08);
+}
+
+.profile-top {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--primary);
+  flex-shrink: 0;
+}
+
+.info .pills {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pill {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.06);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  margin-top: 12px;
+}
+
+.stat { text-align: center; flex:1 }
+.stat .label { color: var(--muted); text-transform: none }
+.stat .value { margin-top: 8px; font-size: 20px; font-weight: 700; color: var(--text) }
+
+/* Videos grid below the card */
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.video-tile { display: block }
+.video-placeholder {
+  background: linear-gradient(180deg, rgba(37,99,235,0.12), rgba(6,182,212,0.08));
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 4px;
+}
+
+@media (max-width: 420px) {
+  .profile-page { padding: 12px }
+  .avatar { width: 64px; height: 64px }
+  .video-placeholder { height: 100px }
+}
