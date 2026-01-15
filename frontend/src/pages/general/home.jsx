@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
+import VideoCard from '../../components/VideoCard'
+import BottomNav from '../../components/BottomNav'
 import '../../styles/home.css'
 
 const ReelFeed = ({ videos = [] }) => {
@@ -26,43 +28,16 @@ const ReelFeed = ({ videos = [] }) => {
     return () => observer.disconnect()
   }, [videos])
 
-  const onVisitStore = (e, item) => {
-    e.stopPropagation()
-    const url = item.storeUrl || item.store || item.link
-    if (url) window.open(url, '_blank')
-  }
-
   return (
     <div className="reels-page">
       <div ref={containerRef} className="reels-feed" aria-label="Reels">
         {Array.isArray(videos) && videos.map(v => (
           <section className="reel" key={v._id || v.id}>
-            <video
-              ref={el => videoRefs.current.set(v._id || v.id, el)}
-              src={v.video || v.src}
-              muted
-              loop
-              playsInline
-              className="reel-video"
-            />
-
-            <div className="reel-overlay">
-              <div className="reel-overlay-gradient" />
-              <div className="reel-content">
-                <div className="reel-description" aria-hidden={false}>
-                  {v.description || v.caption || v.title || ''}
-                </div>
-                <button
-                  className="reel-btn"
-                  onClick={(e) => onVisitStore(e, v)}
-                >
-                  Visit Store
-                </button>
-              </div>
-            </div>
+            <VideoCard video={v} />
           </section>
         ))}
       </div>
+      <BottomNav />
     </div>
   )
 }
@@ -112,24 +87,7 @@ const Home = () => {
 
   return (
     <>
-      {error && (
-        <div style={{position: 'fixed', top:10, left:10, zIndex:1200, background: '#fff', color:'#000', padding:10, borderRadius:6, boxShadow:'0 6px 18px rgba(0,0,0,.12)'}}>
-          <strong>API error:</strong>
-          <pre style={{maxWidth:420, maxHeight:160, overflow:'auto', margin:6}}>{JSON.stringify(error, null, 2)}</pre>
-        </div>
-      )}
-
       <ReelFeed videos={videos.length ? videos : fallback} />
-
-      <div style={{position:'fixed', right:12, top:12, zIndex:1200, color:'#222', background:'#fff', padding:8, borderRadius:6, fontSize:12, boxShadow:'0 6px 18px rgba(0,0,0,.06)'}}>
-        <div><strong>Debug</strong></div>
-        <div>Loading: {String(loading)}</div>
-        <div>Items: {videos.length}</div>
-        <details style={{maxWidth:360}}>
-          <summary>Raw response</summary>
-          <pre style={{maxHeight:220, overflow:'auto'}}>{raw ? JSON.stringify(raw, null, 2) : '—'}</pre>
-        </details>
-      </div>
     </>
   )
 }
