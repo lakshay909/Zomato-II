@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
+import { BACKEND_URL } from '../../config'
 import VideoCard from '../../components/VideoCard'
 import BottomNav from '../../components/BottomNav'
 import '../../styles/home.css'
@@ -53,7 +54,7 @@ const Home = () => {
       setLoading(true)
       setError(null)
       try {
-        const resp = await axios.get('http://localhost:3000/api/food', { withCredentials: true })
+        const resp = await axios.get(`${BACKEND_URL}/api/food`, { withCredentials: true })
         setRaw(resp.data)
         const items = resp.data?.foodItems || resp.data?.foodItem || resp.data?.food || resp.data
         if (Array.isArray(items)) setVideos(items)

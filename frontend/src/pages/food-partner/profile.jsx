@@ -3,6 +3,7 @@ import '../../styles/profile.css'
 import { Link, useParams } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
+import { BACKEND_URL } from '../../config'
 
 const Profile = () => {
     const params = useParams()
@@ -14,7 +15,7 @@ const Profile = () => {
     useEffect(() => {
       if (!routeId) return
       let mounted = true
-      axios.get(`http://localhost:3000/api/food-partner/${routeId}`, { withCredentials: true })
+      axios.get(`${BACKEND_URL}/api/food-partner/${routeId}`, { withCredentials: true })
       .then(res => {
         if (!mounted) return
         setprofile(res.data.foodPartner)
