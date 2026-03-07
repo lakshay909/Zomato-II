@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { BACKEND_URL } from '../../config'
+import { useAuth } from '../../context/AuthContext'
 
 const LoginPartner = () => {
+  const { login } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -14,9 +16,13 @@ const LoginPartner = () => {
     setLoading(true)
     setMessage(null)
     axios.post(`${BACKEND_URL}/api/auth/foodPartner/login`, { email, password }, { withCredentials: true })
-      .then(res => setMessage({ type: 'success', text: res?.data?.message || 'Logged in' }), navigate('/createFood'))
+      .then(res => {
+        setMessage({ type: 'success', text: res?.data?.message || 'Logged in' })
+        login(res.data.user, 'partner')
+        navigate('/createFood')
+      })
       .catch(err => setMessage({ type: 'error', text: err?.response?.data?.error || err.message || 'Login failed' }))
-      .then(() => setLoading(false))
+      .finally(() => setLoading(false))
   }
 
   const navigate = useNavigate()

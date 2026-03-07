@@ -8,7 +8,7 @@ async function authfoodPartnerMiddleware(req, res, next){
 
     if(!token){
         return res.status(401).json({
-            messgae: "Login first!!"
+            message: "Login first!!"
         })
     }
 
@@ -32,7 +32,7 @@ async function authUserMiddleware(req, res, next){
     const token = req.cookies.token;
 
     if(!token){
-        return res.status(401).status({
+        return res.status(401).json({
             message: "Please login first."
         })
     }

@@ -1,8 +1,15 @@
 import React, { useState, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { BACKEND_URL } from '../../config'
+import { useAuth } from '../../context/AuthContext'
 import '../../styles/theme.css'
 import './CreateFood.css'
 
 const CreateFood = () => {
+  const { logout } = useAuth()
+  const navigate = useNavigate()
+
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [videoFile, setVideoFile] = useState(null)
@@ -33,8 +40,29 @@ const CreateFood = () => {
     if (fileInputRef.current) fileInputRef.current.value = ''
   }
 
+  const handleLogout = async () => {
+    try {
+      await axios.get(`${BACKEND_URL}/api/auth/foodPartner/logout`, { withCredentials: true })
+    } catch(e) {
+      console.error('Logout failed:', e)
+    }
+    logout()
+    // Force a hard reload so that any cached data is completely erased from memory
+    window.location.href = '/food-partner/login'
+  }
+
   return (
     <main className="create-food-page">
+      <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '1rem' }}>
+        <button onClick={handleLogout} className="btn ghost" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 17l5-5-5-5M21 12H9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          Logout
+        </button>
+      </div>
+
       <form className="create-food-form" onSubmit={handleSubmit}>
         <h1 className="form-title">Create New Food</h1>
 

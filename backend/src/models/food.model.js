@@ -22,8 +22,7 @@ const foodSchema = new mongoose.Schema({
         default: 0
     },
     likedBy: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "user"
+        type: mongoose.Schema.Types.Mixed
     }]
 }, {
     timestamps: true

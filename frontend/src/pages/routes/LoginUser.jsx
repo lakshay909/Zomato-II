@@ -3,7 +3,10 @@ import axios from 'axios'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { BACKEND_URL } from '../../config'
 
+import { useAuth } from '../../context/AuthContext'
+
 const LoginUser = () => {
+  const { login } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -14,11 +17,13 @@ const LoginUser = () => {
     setLoading(true)
     setMessage(null)
     axios.post(`${BACKEND_URL}/api/auth/user/login`, { email, password }, { withCredentials: true })
-      .then(res => setMessage({ type: 'success', text: res?.data?.message || 'Logged in' }))
+      .then(res => {
+        setMessage({ type: 'success', text: res?.data?.message || 'Logged in' })
+        login(res.data.user, 'user')
+        navigate('/')
+      })
       .catch(err => setMessage({ type: 'error', text: err?.response?.data?.error || err.message || 'Login failed' }))
-      .then(() => setLoading(false))
-    
-    navigate('/')
+      .finally(() => setLoading(false))
   }
 
   const navigate = useNavigate()

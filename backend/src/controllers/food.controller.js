@@ -37,7 +37,7 @@ async function getFoodItem(req, res){
 async function toggleLike(req, res){
     try {
         const { foodId } = req.params;
-        const userId = req.user._id;
+        const userId = req.user ? req.user._id : (req.body.userId || req.ip || 'anonymous');
 
         const food = await foodModel.findById(foodId);
         
