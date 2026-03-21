@@ -57,17 +57,17 @@ A full-stack MERN application connecting food lovers with partner restaurants, f
 
 ### 1. Application Dashboard & Feed
 
-![Application Dashboard](screenshot/dashboard.png)
+<img src="screenshot/dashboard.png" width="600" alt="Application Dashboard">
 _Discover a curated feed of dishes submitted by partners._
 
 ### 2. Login / Authentication Gateway
 
-![Login Page](./screenshot/login.png)
+<img src="./screenshot/login.png" width="600" alt="Login Page">
 _Secure role-based entry point for standard users and verified partners._
 
 ### 3. Food Partner Profile View
 
-![Partner Profile](./screenshot/food-partner.png)
+<img src="./screenshot/food-partner.png" width="600" alt="Partner Profile">
 _Detailed catalog showcasing partner offerings and likes._
 
 _(Note: Adjust the captions above as necessary to perfectly match the visible screens)_
